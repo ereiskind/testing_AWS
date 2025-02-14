@@ -2,8 +2,8 @@ import sys
 from awsglue.utils import getResolvedOptions
 
 args = getResolvedOptions(sys.argv, [
-    "arg1",
+    "name",
     "arg2",
 ])
 
-print("Hello, world!")
+print(f"Hello, {args['name']}!")
