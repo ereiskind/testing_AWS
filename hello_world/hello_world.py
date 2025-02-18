@@ -12,10 +12,7 @@ def configure_logging():
 
 log = logging.getLogger(__name__)
 
-args = getResolvedOptions(sys.argv, [
-    "name",
-    "arg2",
-])
+args = getResolvedOptions(sys.argv, ["name"])
 
 log.info("Start logging")
 print(f"Hello, {args['name']}!")
