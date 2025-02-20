@@ -10,7 +10,10 @@ def configure_logging():
         encoding="utf-8",
     )
 
-log = logging.getLogger(__name__)
+print(f"`logging` (type {type(logging)}): {logging}")
+print(f"`configure_logging()` (type {type(configure_logging())}): {configure_logging()}")
+log = configure_logging().getLogger(__name__)
+print(f"`log` (type {type(log)}): {log}")
 
 args = getResolvedOptions(sys.argv, ["name"])
 
