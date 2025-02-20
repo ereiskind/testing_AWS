@@ -25,30 +25,4 @@ print(f"Hello, {args['name']}!")
 freeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
 print(freeze)
 
-try:
-    df = pandas.DataFrame(
-        [
-            [1, 10, "a"],
-            [2, 20, "b"],
-            [3, 30, "c"],
-        ],
-        columns=["one", "two", "three"],
-    )
-    print(df)
-except Exception as e1:
-    print(f"`pandas.DataFrame()` without import caused exception {e1}")
-    try:
-        import pandas
-        df = pandas.DataFrame(
-            [
-                [1, 10, "a"],
-                [2, 20, "b"],
-                [3, 30, "c"],
-            ],
-            columns=["one", "two", "three"],
-        )
-        print(df)
-    except Exception as e2:
-        print(f"`pandas.DataFrame()` with import caused exception {e2}")
-
 log.info("End logging")
