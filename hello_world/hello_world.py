@@ -1,3 +1,4 @@
+import subprocess
 import sys
 import logging
 from awsglue.utils import getResolvedOptions
@@ -20,6 +21,9 @@ args = getResolvedOptions(sys.argv, ["name"])
 
 log.info("Start logging")
 print(f"Hello, {args['name']}!")
+
+freeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
+print(freeze)
 
 try:
     df = pandas.DataFrame(
