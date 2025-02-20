@@ -18,7 +18,10 @@ print(f"`log` (type {type(log)}): {log}")
 
 args = getResolvedOptions(sys.argv, ["name"])
 
-log.info("Start logging")
 print(f"Hello, {args['name']}!")
-
-log.info("End logging")
+log.debug("This a debug statement")
+log.info("This an info statement")
+log.warning("This a warning statement")
+log.error("This an error statement")
+log.critical("This a critical statement")
+print(f"Goodbye, {args['name']}!")
