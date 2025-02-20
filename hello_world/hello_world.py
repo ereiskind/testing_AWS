@@ -19,4 +19,10 @@ args = getResolvedOptions(sys.argv, ["name"])
 
 log.info("Start logging")
 print(f"Hello, {args['name']}!")
+
+try:
+    print(f"A random number between 1 and 100: {random.randint(1, 100)}")
+except Exception as e:
+    print(f"`random.randint()` caused exception {e}")
+
 log.info("End logging")
