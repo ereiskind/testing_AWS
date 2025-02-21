@@ -1,6 +1,10 @@
 import sys
 import logging
 from awsglue.utils import getResolvedOptions
+import subprocess
+
+freeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
+print(freeze)
 
 def configure_logging():
     logging.basicConfig(
