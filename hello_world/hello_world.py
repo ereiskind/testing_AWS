@@ -15,9 +15,10 @@ def configure_logging():
     )
     print("`configure_logging()` ran")
 
+log = logging.getLogger(__name__)
+print(f"`log` and `log.__dict__` before function:\n{log}\n{log.__dict__}")
 configure_logging()
-log = logging.getLogger("testing not `__main__`")
-print(f"`log` (type {type(log)}): {log}")
+print(f"`log` and `log.__dict__` after function:\n{log}\n{log.__dict__}")
 
 args = getResolvedOptions(sys.argv, ["name"])
 
