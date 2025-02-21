@@ -9,10 +9,10 @@ def configure_logging():
         datefmt="%Y-%m-%d %H:%M:%S",
         encoding="utf-8",
     )
+    print("`configure_logging()` ran")
 
-print(f"`logging` before (type {type(logging)}): {logging}")
 configure_logging()
-print(f"`logging` after (type {type(logging)}): {logging}")
+print(f"`__name__` (type {type(__name__)}): {__name__}")
 log = logging.getLogger(__name__)
 print(f"`log` (type {type(log)}): {log}")
 
