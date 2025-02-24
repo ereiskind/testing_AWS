@@ -15,10 +15,15 @@ def configure_logging():
     )
     print(f"`logging.root.manager.__dict__` at end of function:\n{logging.root.manager.__dict__}")
 
-log = logging.getLogger(__name__)
-print(f"`logging.root.manager.__dict__` before function:\n{logging.root.manager.__dict__}")
+print(f"Initial `logging.root.manager.__dict__`:\n{logging.root.manager.__dict__}")
+log1 = logging.getLogger("log1")
+print(f"`log1`: {log1}\n{log1.__dict__}")
+print(f"`logging.root.manager.__dict__` after 'log1' creation:\n{logging.root.manager.__dict__}")
 configure_logging()
-print(f"`logging.root.manager.__dict__` after function:\n{logging.root.manager.__dict__}")
+print(f"`logging.root.manager.__dict__` after function call:\n{logging.root.manager.__dict__}")
+log2 = logging.getLogger("log2")
+print(f"`log2`: {log2}\n{log2.__dict__}")
+print(f"`logging.root.manager.__dict__` after 'log2' creation:\n{logging.root.manager.__dict__}")
 
 args = getResolvedOptions(sys.argv, ["name"])
 
