@@ -16,11 +16,15 @@ def configure_logging():
     print(f"`logging.root.manager.__dict__` at end of function:\n{logging.root.manager.__dict__}")
 
 name_log = logging.getLogger(__name__)
+print(f"`logging.root.manager.loggerDict['name_log']`: {logging.root.manager.loggerDict['name_log']}\n{logging.root.manager.loggerDict['name_log'].__dict__}")
 configure_logging()
-print(f"`logging.root.manager.__dict__` after function call:\n{logging.root.manager.__dict__}")
-log2 = logging.getLogger("log2")
-print(f"`log2`: {log2}\n{log2.__dict__}")
-print(f"`logging.root.manager.__dict__` after 'log2' creation:\n{logging.root.manager.__dict__}")
+test1_log = logging.getLogger("test1_log")
+print(f"`test1_log`: {test1_log}\n{test1_log.__dict__}")
+print(f"`logging.root.manager.loggerDict['test1_log']`: {logging.root.manager.loggerDict['test1_log']}\n{logging.root.manager.loggerDict['test1_log'].__dict__}")
+logging.basicConfig(level=logging.DEBUG)
+test2_log = logging.getLogger("test2_log")
+print(f"`test2_log`: {test2_log}\n{test2_log.__dict__}")
+print(f"`logging.root.manager.loggerDict['test2_log']`: {logging.root.manager.loggerDict['test2_log']}\n{logging.root.manager.loggerDict['test2_log'].__dict__}")
 
 args = getResolvedOptions(sys.argv, ["name"])
 
