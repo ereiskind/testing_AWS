@@ -9,7 +9,7 @@ print(freeze)
 def configure_logging():
     logging.basicConfig(
         level=logging.INFO,
-        format= "[%(asctime)s] %(name)s::%(lineno)d - %(message)s",  # "[timestamp] module name::line number - error message"
+        format="[%(asctime)s] %(name)s::%(lineno)d - %(message)s",  # "[timestamp] module name::line number - error message"
         datefmt="%Y-%m-%d %H:%M:%S",
         encoding="utf-8",
     )
