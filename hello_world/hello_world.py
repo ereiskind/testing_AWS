@@ -13,12 +13,12 @@ def configure_logging():
         datefmt="%Y-%m-%d %H:%M:%S",
         encoding="utf-8",
     )
-    print("`configure_logging()` ran")
+    print(f"`logging` and `logging.__dict__` at end of function:\n{logging}\n{logging.__dict__}")
 
 log = logging.getLogger(__name__)
-print(f"`log` and `log.__dict__` before function:\n{log}\n{log.__dict__}")
+print(f"`logging` and `logging.__dict__` before function:\n{logging}\n{logging.__dict__}")
 configure_logging()
-print(f"`log` and `log.__dict__` after function:\n{log}\n{log.__dict__}")
+print(f"`logging` and `logging.__dict__` after function:\n{logging}\n{logging.__dict__}")
 
 args = getResolvedOptions(sys.argv, ["name"])
 
