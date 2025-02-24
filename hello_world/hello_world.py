@@ -23,7 +23,7 @@ print(f"`logging` and `logging.__dict__` after function:\n{logging}\n{logging.__
 args = getResolvedOptions(sys.argv, ["name"])
 
 if __name__ == '__main__':
-    statement = ", {args['name']}!"
+    statement = f", {args['name']}!"
     print("Hello" + statement)
     log.debug("This a debug statement")
     log.info("This an info statement")
