@@ -13,18 +13,11 @@ def configure_logging():
         datefmt="%Y-%m-%d %H:%M:%S",
         encoding="utf-8",
     )
-    print(f"`logging.root.manager.__dict__` at end of function:\n{logging.root.manager.__dict__}")
 
 name_log = logging.getLogger(__name__)
-print(f"`logging.root.manager.loggerDict['__main__']`: {logging.root.manager.loggerDict['__main__']}\n{logging.root.manager.loggerDict['__main__'].__dict__}")
-configure_logging()
-test1_log = logging.getLogger("test1_log")
-print(f"`logging.root.manager.loggerDict['test1_log']`: {logging.root.manager.loggerDict['test1_log']}\n{logging.root.manager.loggerDict['test1_log'].__dict__}")
+print(f"`name_log` before `basicConfig`: {name_log}")
 logging.basicConfig(level=logging.DEBUG)
-print(f"`logging.root.manager.__dict__` after `logging.basicConfig`:\n{logging.root.manager.__dict__}")
-print(f"main log after `logging.basicConfig`: {name_log}\n{name_log.__dict__}")
-test2_log = logging.getLogger("test2_log")
-print(f"`logging.root.manager.loggerDict['test2_log']`: {logging.root.manager.loggerDict['test2_log']}\n{logging.root.manager.loggerDict['test2_log'].__dict__}")
+print(f"`name_log` before `basicConfig`: {name_log}")
 
 args = getResolvedOptions(sys.argv, ["name"])
 
