@@ -2,6 +2,7 @@ import sys
 import logging
 from awsglue.utils import getResolvedOptions
 import subprocess
+from random import choice
 
 
 def configure_logging():
@@ -21,14 +22,14 @@ freeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
 log.info(f"The installed packages:\n{freeze}")
 
 
-args = getResolvedOptions(sys.argv, ["name"])
+#Section: Check Input Ingest
+args = getResolvedOptions(sys.argv, [
+    "first_input",
+    "second_input"
+])
 
-if __name__ == '__main__':
-    statement = f", {args['name']}!"
-    print("Hello" + statement)
-    name_log.debug("This a debug statement")
-    name_log.info("This an info statement")
-    name_log.warning("This a warning statement")
-    name_log.error("This an error statement")
-    name_log.critical("This a critical statement")
-    print("Goodbye" + statement)
+statement = f", {args['first_input']}!"
+log.info("Hello" + statement)
+for i in len(args['second_input']):
+    log.warning(choice(args['second_input']))
+log.info("Goodbye" + statement)
