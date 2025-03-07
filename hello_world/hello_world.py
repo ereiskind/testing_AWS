@@ -15,6 +15,12 @@ def configure_logging():
 
 log = logging.getLogger(__name__)
 
+
+#Section: Check Packages
+freeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
+log.info(f"The installed packages:\n{freeze}")
+
+
 args = getResolvedOptions(sys.argv, ["name"])
 
 if __name__ == '__main__':
