@@ -3,8 +3,6 @@ import logging
 from awsglue.utils import getResolvedOptions
 import subprocess
 
-freeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
-print(freeze)
 
 def configure_logging():
     logging.basicConfig(
@@ -12,12 +10,10 @@ def configure_logging():
         format="[%(asctime)s] %(name)s::%(lineno)d - %(message)s",  # "[timestamp] module name::line number - error message"
         datefmt="%Y-%m-%d %H:%M:%S",
         encoding="utf-8",
+        force=True,
     )
 
-name_log = logging.getLogger(__name__)
-print(f"`name_log` before `basicConfig`: {name_log}")
-logging.basicConfig(level=logging.DEBUG)
-print(f"`name_log` before `basicConfig`: {name_log}")
+log = logging.getLogger(__name__)
 
 args = getResolvedOptions(sys.argv, ["name"])
 
