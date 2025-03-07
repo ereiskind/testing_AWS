@@ -1,0 +1,76 @@
+{
+    "Comment": "A description of my state machine",
+    "StartAt": "Confirm Variables",
+    "States": {
+        "Confirm Variables": {
+            "Type": "Choice",
+            "Choices": [
+                {
+                    "Next": "Run hello_world",
+                    "And": [
+                        {
+                            "Variable": "$.key_to_first_input_in_JSON",
+                            "IsPresent": true
+                        },
+                        {
+                            "Variable": "$.key_to_second_input_in_JSON",
+                            "IsPresent": true
+                        }
+                    ]
+                }
+            ],
+            "Default": "Fail"
+        },
+        "Fail": {
+            "Type": "Fail"
+        },
+        "Run hello_world": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::glue:startJobRun",
+            "Parameters": {
+                "JobName": "hello_world",
+                "Arguments": {
+                    "--first_input.$": "$.key_to_first_input_in_JSON",
+                    "--second_input.$": "$.key_to_second_input_in_JSON",
+                    "--additional-python-modules": "awscli==1.39.*"
+                }
+            },
+            "Next": "Wait"
+        },
+        "Wait": {
+            "Type": "Wait",
+            "Seconds": 120,
+            "Next": "Get hello_world Result"
+        },
+        "Get hello_world Result": {
+            "Type": "Task",
+            "Parameters": {
+                "JobName.$": "$.JobName",
+                "RunId.$": "$.JobRunId"
+            },
+            "Resource": "arn:aws:states:::aws-sdk:glue:getJobRuns",
+            "Next": "Check hello_world Result"
+        },
+        "Check hello_world Result": {
+            "Type": "Choice",
+            "Choices": [
+                {
+                    "Next": "Get Output Email",
+                    "Variable": "$.JobRunState",
+                    "StringEquals": "SUCCESS"
+                }
+            ],
+            "Default": "Fail"
+        },
+        "Get Output Email": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::sns:publish",
+            "Parameters": {
+                "Message.$": "States.Format('The `$` value is {} and the `$$` value is {}', $, $$)",
+                "TopicArn": "arn:aws:sns:us-east-1:612489222122:AWS_test"
+            },
+            "End": true
+        }
+    },
+    "QueryLanguage": "JSONPath"
+}
