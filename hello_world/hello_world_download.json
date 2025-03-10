@@ -21,7 +21,7 @@
 		"jobParameters": [],
 		"tags": [],
 		"jobMode": "DEVELOPER_MODE",
-		"createdOn": "2025-02-14T17:53:17.651Z",
+		"createdOn": "2025-03-07T16:34:14.559Z",
 		"developerMode": true,
 		"connectionsList": [],
 		"temporaryDirectory": "s3://aws-glue-assets-612489222122-us-east-1/temporary/",
@@ -36,7 +36,7 @@
 			"Repository": "testing_AWS",
 			"Branch": "main",
 			"Folder": "hello_world",
-			"LastCommitId": "90a875fec6f9732224349cebac4fda1c0c9fda3c"
+			"LastCommitId": "1a5c928e342762dc6d8555b9716811e876a69538"
 		},
 		"maintenanceWindow": null,
 		"etlAutoScaling": false,
@@ -44,5 +44,5 @@
 	},
 	"hasBeenSaved": false,
 	"usageProfileName": null,
-	"script": "import sys\nimport logging\nfrom awsglue.utils import getResolvedOptions\nimport subprocess\n\nfreeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])\nprint(freeze)\n\ndef configure_logging():\n    logging.basicConfig(\n        level=logging.INFO,\n        format=\"[%(asctime)s] %(name)s::%(lineno)d - %(message)s\",  # \"[timestamp] module name::line number - error message\"\n        datefmt=\"%Y-%m-%d %H:%M:%S\",\n        encoding=\"utf-8\",\n    )\n\nname_log = logging.getLogger(__name__)\nprint(f\"`name_log` before `basicConfig`: {name_log}\")\nlogging.basicConfig(level=logging.DEBUG)\nprint(f\"`name_log` before `basicConfig`: {name_log}\")\n\nargs = getResolvedOptions(sys.argv, [\"name\"])\n\nif __name__ == '__main__':\n    statement = f\", {args['name']}!\"\n    print(\"Hello\" + statement)\n    name_log.debug(\"This a debug statement\")\n    name_log.info(\"This an info statement\")\n    name_log.warning(\"This a warning statement\")\n    name_log.error(\"This an error statement\")\n    name_log.critical(\"This a critical statement\")\n    print(\"Goodbye\" + statement)"
+	"script": "import sys\nimport logging\nfrom awsglue.utils import getResolvedOptions\nimport subprocess\nfrom random import choice\n\n\ndef configure_logging():\n    logging.basicConfig(\n        level=logging.INFO,\n        format=\"[%(asctime)s] %(name)s::%(lineno)d - %(message)s\",  # \"[timestamp] module name::line number - error message\"\n        datefmt=\"%Y-%m-%d %H:%M:%S\",\n        encoding=\"utf-8\",\n        force=True,\n    )\n\nlog = logging.getLogger(__name__)\n\n\n#Section: Check Packages\nfreeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])\nlog.info(f\"The installed packages:\\n{freeze}\")\n\n\n#Section: Check Input Ingest\nargs = getResolvedOptions(sys.argv, [\n    \"first_input\",\n    \"second_input\"\n])\n\nstatement = f\", {args['first_input']}!\"\nlog.info(\"Hello\" + statement)\nfor i in len(args['second_input']):\n    log.warning(choice(args['second_input']))\nlog.info(\"Goodbye\" + statement)"
 }
